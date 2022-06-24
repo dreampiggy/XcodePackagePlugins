@@ -35,6 +35,15 @@ let package = Package(
                     description: "Count all the source code lines number")
 //                permissions: [.writeToPackageDirectory(reason: "Testing")]
             )
+        ),
+        .plugin(
+            name: "RegenerateContributorsList",
+            capability: .command(
+                intent: .custom(
+                    verb: "regenerate-contributors-list",
+                    description: "Regenerate the contributors list and write into CONTRIBUTORS.txt"),
+                permissions: [.writeToPackageDirectory(reason: "This command create a CONTRIBUTORS.txt file in the package directory")]
+            )
         )
     ]
 )

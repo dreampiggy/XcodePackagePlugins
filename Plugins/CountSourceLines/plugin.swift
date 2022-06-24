@@ -1,12 +1,8 @@
 import Foundation
 import PackagePlugin
-#if os(macOS)
-import AppKit
-import UserNotifications
-#endif
 
 @main
-struct CountSourceLinesPlugin : CommandPlugin {
+struct CountSourceLines : CommandPlugin {
     // Entry
     func performCommand(context: PluginContext, arguments: [String]) async throws {
         let swiftSourceModuleTargets = context.package.allTargets

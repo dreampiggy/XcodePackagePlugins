@@ -9,9 +9,31 @@ Count the line of source code from the whole Swift Package. Supports Swift/Objec
 ### Usage
 
 ```
-$ swift package plugin count-source-lines
+swift package plugin count-source-lines
 --- Target: XcodePackagePlugins ---
 Language: Swift, lines: 6
 --- Target: XcodePackagePluginsTests ---
 Language: Swift, lines: 11
+```
+
+Example on [SDWebImageSwiftUI](https://github.com/SDWebImage/SDWebImageSwiftUI)
+
+```
+swift package plugin count-source-lines
+--- Target: SDWebImageSwiftUI ---
+Language: Swift, lines: 2286
+--- Target: SDWebImage ---
+Language: C/C++ Header, lines: 7551
+Language: Objective-C, lines: 13344
+```
+
+## Regenerate Contributors List
+
+Regenerate the list of all contributors into current package, write into the CONTRIBUTORS.txt file.
+
+### Usage
+
+```
+swift package plugin --allow-writing-to-package-directory regenerate-contributors-list
+Writing 1 contributors to /Users/lizhuoli/Documents/GitHub/XcodePackagePlugins/CONTRIBUTORS.txt
 ```
