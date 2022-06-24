@@ -16,7 +16,7 @@ struct CountSourceLines : CommandPlugin {
                     let fileAttributes = try fileURL.resourceValues(forKeys:[.isRegularFileKey])
                     // Filter only file with extensions
                     if let isRegularFile = fileAttributes.isRegularFile, isRegularFile {
-                        if CountSourceLinesPlugin.languageExtensions[fileURL.pathExtension] != nil {
+                        if CountSourceLines.languageExtensions[fileURL.pathExtension] != nil {
                             allSourceFiles.insert(fileURL)
                         }
                     }
@@ -28,7 +28,7 @@ struct CountSourceLines : CommandPlugin {
                 var languageLines: [String: Int] = [:]
                 for sourceFile in allSourceFiles {
                     group.addTask {
-                        let language = CountSourceLinesPlugin.languageExtensions[(sourceFile.pathExtension)] ?? "Unknown"
+                        let language = CountSourceLines.languageExtensions[(sourceFile.pathExtension)] ?? "Unknown"
                         let line = await calculateLines(fileURL: sourceFile)
                         return (language, line)
                     }
@@ -48,17 +48,6 @@ struct CountSourceLines : CommandPlugin {
                 try await printCLI(target: target, languageLines: languageLines)
             }
         }
-    }
-    
-    @MainActor
-    func confirmAbletonIsReady(question: String, text: String) -> Bool {
-        let alert = NSAlert()
-        alert.messageText = question
-        alert.informativeText = text
-        alert.alertStyle = NSAlert.Style.warning
-        alert.addButton(withTitle: "OK")
-        alert.addButton(withTitle: "Cancel")
-        return alert.runModal() == NSApplication.ModalResponse.alertFirstButtonReturn
     }
     
     func printGUI(target: Target, languageLines: [String : Int]) async throws {

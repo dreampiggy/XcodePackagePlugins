@@ -12,7 +12,10 @@ let package = Package(
             targets: ["XcodePackagePlugins"]),
         .plugin(
             name: "CountSourceLines",
-            targets: ["CountSourceLines"])
+            targets: ["CountSourceLines"]),
+        .plugin(
+            name: "RegenerateContributorsList",
+            targets: ["RegenerateContributorsList"])
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -33,7 +36,6 @@ let package = Package(
                 intent: .custom(
                     verb: "count-source-lines",
                     description: "Count all the source code lines number")
-//                permissions: [.writeToPackageDirectory(reason: "Testing")]
             )
         ),
         .plugin(
