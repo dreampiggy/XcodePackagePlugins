@@ -1,4 +1,4 @@
-// swift-tools-version: 5.7
+// swift-tools-version: 5.6
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -10,6 +10,9 @@ let package = Package(
         .library(
             name: "XcodePackagePlugins",
             targets: ["XcodePackagePlugins"]),
+        .plugin(
+            name: "CountSourceLines",
+            targets: ["CountSourceLines"])
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -24,5 +27,14 @@ let package = Package(
         .testTarget(
             name: "XcodePackagePluginsTests",
             dependencies: ["XcodePackagePlugins"]),
+        .plugin(
+            name: "CountSourceLines",
+            capability: .command(
+                intent: .custom(
+                    verb: "count-source-lines",
+                    description: "Count all the source code lines number")
+//                permissions: [.writeToPackageDirectory(reason: "Testing")]
+            )
+        )
     ]
 )
